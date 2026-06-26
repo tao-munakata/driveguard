@@ -45,3 +45,15 @@ docker compose up -d
 
 ## リポジトリ
 https://github.com/tao-munakata/driveguard
+
+## 2026-06-27 セッション記録（v0.1.0リリース完了）
+- v0.1.0 を GitHub にpush（GitHub Actions CI パス）
+- Render デプロイ設定（`render.yaml`）及びマイグレーション・シード設定完了
+- 次: Render にログイン → Blueprint で GitHub リポジトリ接続 → 自動デプロイ
+- 注意: デプロイ完了後、backend の実際URL を frontend の VITE_API_URL に設定し Redeploy 必要
+
+## 2026-06-27 セッション記録（Renderデプロイ手順説明）
+- Renderダッシュボードの Blueprint フロー操作手順を説明
+- render.yaml は GitHub リポジトリに存在（確認済み）
+- 次: Render.com でダッシュボード右上 [New +] → [Blueprint] → GitHub接続 → Apply で自動デプロイ開始
+- 残タスク: Render Blueprint フローの実行・デプロイ確認、VITE_API_URL の更新設定
