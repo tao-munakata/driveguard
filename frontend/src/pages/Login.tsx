@@ -76,9 +76,25 @@ export default function Login() {
           </button>
         </form>
 
-        <p className="text-xs text-gray-400 text-center mt-6">
-          テスト: driver1@example.com / password123
-        </p>
+        <div className="mt-6 border-t border-gray-100 pt-4">
+          <p className="text-xs text-gray-400 text-center mb-2">デモ用クイックログイン</p>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => { setEmail('driver1@example.com'); setPassword('password123'); }}
+              className="flex-1 bg-gray-100 text-gray-700 rounded-lg py-2 text-xs font-medium hover:bg-gray-200 active:bg-gray-300"
+            >
+              運転者でログイン
+            </button>
+            <button
+              type="button"
+              onClick={() => { setEmail('manager@example.com'); setPassword('password123'); }}
+              className="flex-1 bg-blue-50 text-blue-700 rounded-lg py-2 text-xs font-medium hover:bg-blue-100 active:bg-blue-200"
+            >
+              管理者でログイン
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

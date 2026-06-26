@@ -5,12 +5,17 @@ import alcoholRouter from './routes/alcohol';
 import reportsRouter from './routes/reports';
 import adminRouter from './routes/admin';
 import pool from './db';
+import { runMigrations } from './migrate';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
+
+app.get('/', (_req, res) => {
+  res.json({ status: 'ok', service: 'DriveGuard Mobile API', version: '1.0.0' });
+});
 
 app.use('/api/auth', authRouter);
 app.use('/api/alcohol-checks', alcoholRouter);
@@ -32,6 +37,13 @@ app.use((err: Error, _req: express.Request, res: express.Response, _next: expres
   res.status(500).json({ error: 'サーバーエラーが発生しました' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Backend running on port ${PORT}`);
-});
+runMigrations()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Backend running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error('Migration failed:', err);
+    process.exit(1);
+  });

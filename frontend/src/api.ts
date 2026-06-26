@@ -1,7 +1,9 @@
 import axios from 'axios';
 import type { User, Vehicle, AlcoholCheck, DrivingReport, DashboardStats } from './types';
 
-const api = axios.create({ baseURL: '/api' });
+const api = axios.create({
+  baseURL: (import.meta as { env: Record<string, string> }).env.VITE_API_URL || '/api',
+});
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');

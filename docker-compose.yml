@@ -25,6 +25,8 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       JWT_SECRET: ${JWT_SECRET}
+    volumes:
+      - ./backend/src:/app/src
     depends_on:
       db:
         condition: service_healthy
@@ -33,6 +35,8 @@ services:
 
   frontend:
     build: ./frontend
+    volumes:
+      - ./frontend/src:/app/src
     ports:
       - "5174:5173"
     depends_on:
