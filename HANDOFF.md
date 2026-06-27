@@ -1,7 +1,7 @@
 # HANDOFF.md — DriveGuard Mobile
 
 ## 現在の状態
-v0.1.0 リリース済み。ローカルDocker動作確認済み。`rikb.telejapan.net` 公開作業中（Cloudflare Tunnel設定中）。
+v0.1.1 稼働中。`https://rikb.telejapan.net` で HTTPS 公開済み（Let's Encrypt / 有効期限: 2026-09-25）。
 
 ## 最終作業 (2026-06-27)
 - v0.1.0 タグ付けリリース
@@ -136,3 +136,16 @@ https://github.com/tao-munakata/driveguard
 - nginx設定に rikb.telejapan.net ブロック追加（/api/*→backend、その他→静的ファイル）
 - permission_mode を bypassPermissions に修正
 - 残タスク: muumuu MCP で DNS A レコード追加 → certbot で HTTPS化
+
+## 2026-06-27 セッション記録（DNS レコード追加完了）
+- muumuu-domain MCP で `rikb.telejapan.net A 49.212.205.85` 追加完了（レコードID: 29871865）
+- ドメインID: MU08281617 / TTL: 3600秒
+- DNS伝播確認済み・certbot 証明書取得完了・nginx HTTPS設定完了（2026-06-27）
+- 公開URL: https://rikb.telejapan.net（HTTP→HTTPSリダイレクト込み）
+- 残タスク: 証明書自動更新設定（certbot renew cron）
+
+## セッション記録（HTTPS公開化・動作確認完了）
+- VPS フロントエンド静的配信・nginx リバースプロキシ設定完了
+- HTTPS化（Let's Encrypt + certbot）完了 / 有効期限: 2026-09-25
+- ドメイン: https://rikb.telejapan.net で本運用開始
+- 残タスク: 証明書自動更新 cron 設定
