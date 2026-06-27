@@ -53,14 +53,27 @@ docker compose up -d
 ## リポジトリ
 https://github.com/tao-munakata/driveguard
 
-## 2026-06-27 セッション記録
-- v0.1.0 リリース・GitHub push
+## 2026-06-27 セッション記録（v0.1.0 → v0.1.1）
+
+### v0.1.0
+- 初期実装・Docker動作確認・GitHub push
 - Hono + D1 Cloudflare Workers バックエンド構築（driveguard-api.affihub-tao.workers.dev）
-- フロントエンドCF Workerデプロイ（黒画面問題あり・未解決）
-- rikb.telejapan.net をVPS(49.212.205.85)でDocker公開する方針に変更
-- Cloudflare Tunnel 試みたがtelejapan.netがCF管理外のためキャンセル
-- Stop hookのpermission_mode を bypassPermissions に修正（次回から有効）
-- 残タスク: VPS SSH接続情報確認 → git clone → docker compose up → muumuu MCP でAレコード追加
+- フロントエンドCF Workerデプロイ（黒画面問題あり・保留）
+
+### v0.1.1
+- VPS（49.212.205.85）に Docker Compose でデプロイ完了
+  - SSH key: ~/.ssh/id_ed25519_vps_telejapan / user: ubuntu
+  - /home/ubuntu/driveguard/ に git clone
+  - backend:3006, frontend(Vite):5175, db:internal
+- フロントエンドを静的ビルドして nginx から直接配信
+  - VITE_API_URL=http://rikb.telejapan.net/api でビルド
+  - /home/ubuntu/driveguard/frontend/dist → nginx /var/www/driveguard
+- nginx（/home/ubuntu/nginx/）に rikb.telejapan.net ブロック追加
+  - /api/* → backend:3006 にプロキシ
+  - それ以外 → 静的ファイル (try_files)
+- Stop hook permission_mode を bypassPermissions に修正
+- Vite allowedHosts: 'all' 追加（vite.config.ts）
+- 残タスク: muumuu MCP で rikb.telejapan.net A 49.212.205.85 を追加 → HTTPS化（certbot）
 
 ## 2026-06-27 セッション記録（v0.1.0リリース完了）
 - v0.1.0 を GitHub にpush（GitHub Actions CI パス）
@@ -110,3 +123,9 @@ https://github.com/tao-munakata/driveguard
 - Cloudflare Workers 黒画面の原因を特定：ビルド済みファイルが反映されていない問題
 - muumuu MCP は Claude Desktop 側のため、このセッションからは操作不可
 - 残タスク: Cloudflare黒画面を修正＆デプロイ → muumuu MCP で CNAME レコード追加（Claude Desktop側で実施）
+
+## 2026-06-28 セッション記録（VPS デプロイ環境構築完了）
+- VPS (49.212.205.85) での環境構築完了：Node.js LTS・Docker Compose インストール済み
+- リポジトリ git clone 実施
+- Docker Compose で driveguard 起動確認（全コンテナ正常稼働）
+- 残タスク: DNS A レコード追加（rikb.telejapan.net → 49.212.205.85）をmuumuu MCP で設定 → HTTPS化（Let's Encrypt）
