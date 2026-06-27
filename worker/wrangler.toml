@@ -1,0 +1,12 @@
+name = "driveguard-api"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "driveguard"
+database_id = "d0a9c727-8f65-4397-b04b-d0dd944a0b47"
+
+[vars]
+JWT_SECRET = "driveguard_jwt_2026"

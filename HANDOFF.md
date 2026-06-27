@@ -57,3 +57,21 @@ https://github.com/tao-munakata/driveguard
 - render.yaml は GitHub リポジトリに存在（確認済み）
 - 次: Render.com でダッシュボード右上 [New +] → [Blueprint] → GitHub接続 → Apply で自動デプロイ開始
 - 残タスク: Render Blueprint フローの実行・デプロイ確認、VITE_API_URL の更新設定
+
+## 2026-06-27 セッション記録（Railway + Cloudflare Pages デプロイ設定）
+- Railway・Cloudflare Pages デプロイ設定・railway.toml 追加（バックエンド自動検出）
+- GitHub にpush完了
+- 2段階デプロイ手順を提供：Step1（Railway: バックエンド + PostgreSQL）→ Step2（Cloudflare Pages: フロントエンド）
+- 残タスク: Railway デプロイ実施 → URLコピー → Cloudflare Pages の VITE_API_URL に設定・デプロイ
+
+## 2026-06-27 セッション記録（Cloudflare Pages フロントデプロイ完了）
+- フロントエンドを Cloudflare Pages に デプロイ完了（URL: `https://driveguard.affihub-tao.workers.dev`）
+- 現状: バックエンド（API）がまだデプロイされていないため、ログイン機能が動作しない状態
+- Railway でのバックエンド + PostgreSQL デプロイが次のステップ
+- 残タスク: Railway でバックエンドデプロイ → API URL を取得 → VITE_API_URL を更新して Cloudflare に再デプロイ
+
+## 2026-06-27 セッション記録（Railway デプロイ手順説明）
+- Railway.app でのバックエンド + PostgreSQL デプロイ手順を詳細説明
+- 手順: ログイン → New Project → Deploy from GitHub → PostgreSQL 追加 → 環境変数設定 → Domain 生成
+- セッション終了時点で Railway URL の確認待ち状態
+- 残タスク: Railway デプロイ実行 → バックエンド URL を取得 → Cloudflare Pages で VITE_API_URL 更新・再デプロイ
