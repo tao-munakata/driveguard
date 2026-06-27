@@ -129,3 +129,10 @@ https://github.com/tao-munakata/driveguard
 - リポジトリ git clone 実施
 - Docker Compose で driveguard 起動確認（全コンテナ正常稼働）
 - 残タスク: DNS A レコード追加（rikb.telejapan.net → 49.212.205.85）をmuumuu MCP で設定 → HTTPS化（Let's Encrypt）
+
+## 2026-06-27 セッション記録（VPS フロントエンド静的配信・nginx 設定）
+- フロントエンドを静的ビルド（dist）にしてnginxから直接配信する構成に変更
+- Vite allowedHosts: 'all' を追加（リバースプロキシ経由のアクセス対応）
+- nginx設定に rikb.telejapan.net ブロック追加（/api/*→backend、その他→静的ファイル）
+- permission_mode を bypassPermissions に修正
+- 残タスク: muumuu MCP で DNS A レコード追加 → certbot で HTTPS化
